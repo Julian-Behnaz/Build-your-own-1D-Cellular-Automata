@@ -47,7 +47,7 @@ Each subrule has two parts: a "before" state and an "after" state.
 
     ![Assets/Frame_2_(1).png](Assets/Frame_2_(1).png)
 
-    By the same logic, adding a third cell doubles the possibilities yet again, which gives us $2*2*2 = 8$ possible "before" states with 3 cells that have two possible states each. In general, the number of possible states given $n$ cells is $2^n$. With $3$ cells, there's $2^3$ possible before states, so we need $8$ subrules.
+    By the same logic, adding a third cell doubles the possibilities yet again, which gives us <b>2&#215;2&#215;2 = 8</b> possible "before" states with 3 cells that have two possible states each. In general, the number of possible states given <b>n</b> cells is <b>2<sup>n</sup></b>. With <b>3</b> cells, there's <b>2<sup>3</sup></b> possible before states, so we need <b>8</b> subrules.
 
 Since each rule only has a few subrules, we can write them all out. For example, here's all of Rule 30's subrules:
 
@@ -61,7 +61,7 @@ If you're new to binary, don't let that scare you off; we'll take the time to ex
 
     Solution:
 
-    Each subrule has one of two possible states. Since there are $8$ subrules, there are $2^8$, or $256$ possible Rules.
+    Each subrule has one of two possible states. Since there are <b>8</b>. subrules, there are <b>2<sup>8</sup></b>, or <b>256</b> possible Rules.
 
 Some of these Rules are incredibly boring. For example, Rule 0 represents a dead world; irrespective of the starting state, cells become and stay empty. Others are super interesting. Rule 110 has its own [Wikipedia page](https://en.wikipedia.org/wiki/Rule_110):
 
