@@ -25,13 +25,19 @@ Above you can see several 1D cellular automata visualized over time, with filled
 
 We said that the state of each cell at time `t` depends on its state and that of its direct neighbors at `t-1`. We can visualize that relationship with a "T" shape, like this:
 
-![Assets/T_Shape.png](Assets/T_Shape.png)
+<p align="center">
+  <img width="200" src="Assets/T_Shape.png" alt="T-Shape diagram showing how a cell's state depends on the previous state">
+</p>
 
-![Assets/Subrule_Example.png](Assets/Subrule_Example.png)
+<p align="center">
+  <img width="200" src="Assets/Subrule_Example.png" alt="An example of a specific subrule: 101 -> 1">
+</p>
 
 An automaton's rule expresses what state the "after" cell (at time `t`) should be in given the 3 "before" states (at `t-1`), for all possible configurations of those states. For example, a rule might include the subrule "if I am `0` and my left and right neighbors are `1`, I should become `1`":
 
-![Assets/Subrule_Example-1.png](Assets/Subrule_Example-1.png)
+<p align="center">
+  <img width="200" src="Assets/Subrule_Example-1.png" alt="An example of a specific subrule (101 -> 1) annotated with numbers">
+</p>
 
 Each subrule has two parts: a "before" state and an "after" state.
 
@@ -41,17 +47,21 @@ Each subrule has two parts: a "before" state and an "after" state.
 
     If the before state involved just one cell, there would be two possible before states, 0 and 1:
 
-    ![Assets/one_cell.png](Assets/one_cell.png)
+    <p align="center">
+      <img width="200" src="Assets/one_cell.png" alt="One cell can be 1 or 0">
+    </p>
 
     Adding a cell adds two additional possibilities for each of the previous possibilities:
 
-    ![Assets/Frame_2_(1).png](Assets/Frame_2_(1).png)
+    <p align="center">
+      <img width="200" src="Assets/Frame_2_(1).png" alt="Two cells can be 00, 01, 10, or 11">
+    </p>
 
     By the same logic, adding a third cell doubles the possibilities yet again, which gives us <b>2&#215;2&#215;2 = 8</b> possible "before" states with 3 cells that have two possible states each. In general, the number of possible states given <b>n</b> cells is <b>2<sup>n</sup></b>. With <b>3</b> cells, there's <b>2<sup>3</sup></b> possible before states, so we need <b>8</b> subrules.
 
 Since each rule only has a few subrules, we can write them all out. For example, here's all of Rule 30's subrules:
 
-![Assets/Rule_30.png](Assets/Rule_30.png)
+![Rule 30's subrules: 111->0, 110->0, 101->0, 100->1, 011->1, 010->1, 001->1, 000->0](Assets/Rule_30.png)
 
 You may have noticed that there's a lot of 0s and 1s everywhere, and that this looks an awful lot like binary, the number system computers use. That's not an accident. In fact, the classification system for 1D cellular automata involves binary; the number `30` from Rule 30 is `00011110` in binary.
 
@@ -69,7 +79,9 @@ Some of these Rules are incredibly boring. For example, Rule 0 represents a dead
 
 Isn't that wild?
 
-![Assets/ElementaryCA_850.gif](Assets/ElementaryCA_850.gif)
+<p align="center">
+    <img width="200" src="Assets/ElementaryCA_850.gif" alt="18 different CAs forming interesting triangular patterns">
+</p>
 
 # Implementing 1D Cellular Automata
 
@@ -106,7 +118,9 @@ for (int i = 0; i < ROW_LENGTH; i++) {
 
 Unfortunately, that doesn't work. When `i` is `0`, `i-1` is `-1`, and `current_cell_states[-1]` is out of bounds. If `ROW_LENGTH` is `5`, only `0`, `1`, `2`, `3`, and `4` are valid indices:
 
-![Assets/out_of_bounds.png](Assets/out_of_bounds.png)
+<p align="center">
+    <img width="200" src="Assets/out_of_bounds.png" alt="In an array of length 5, index -1 and 5 are out of bounds">
+</p>
 
 Similarly, if `i` is `4`, `i+1` is `5`, which is out of bounds in the other direction. Before we try to fix this, let's think about what our code is trying to do and what might be going wrong at either end of the array.
 
@@ -114,15 +128,21 @@ In general, we're moving through all of our cells, one at a time, and determinin
 
 This works:
 
-![Assets/edges_center.png](Assets/edges_center.png)
+<p align="center">
+    <img width="200" src="Assets/edges_center.png" alt="Indices 1,3 are valid neighbors for index 2">
+</p>
 
 This doesn't:
 
-![Assets/edge_right.png](Assets/edge_right.png)
+<p align="center">
+    <img width="200" src="Assets/edge_right.png" alt="Index 4 has valid neighbor 3 and invalid neighbor 5">
+</p>
 
 This also doesn't:
 
-![Assets/edge_left.png](Assets/edge_left.png)
+<p align="center">
+    <img width="200" src="Assets/edge_left.png" alt="Index 0 has valid neighbor 1 and invalid neighbor -1">
+</p>
 
 One option would be to only look at the neighbors of cells with indices between `i=1` and `i=ROW_LENGTH-2`, but that would mean that the cells at the edges can never change state. Instead, we're going to pretend that the edges wrap around; that if we look at the left neighbor of cell `i=0` we are going to get the cell at index `ROW_LENGTH-1` and if we look at the right neighbor of cell `i=ROW_LENGTH-1`, we are going to get the cell at index `0`.
 
@@ -157,7 +177,9 @@ A clock face has the numbers 1 through 12. Most of the time, the number after th
 
 The remainder operator (`%` in C) happens to have a similar wrapping property. The remainder of 4 divided by 5 (written `4%5`),  is 4. `5%5` is 0. `6%5` is 1. For positive numbers, the result of `x%n` is always between `0` and `n-1`.
 
-![Assets/Remainder.png](Assets/Remainder.png)
+<p align="center">
+    <img width="200" src="Assets/Remainder.png" alt="Diagram showing that on a clock with numbers 0-4 inclusive, higher numbers wrap to the numbers 0-4">
+</p>
 
 So we can rewrite
 
@@ -176,9 +198,18 @@ as
 int right = current_cell_states[(i+1)%ROW_LENGTH];
 ```
 
-[Wrapping around on the right with ROW_LENGTH 5](https://www.notion.so/09079cd140bd4bd8af0b2bc392214640)
+### Wrapping around on the right with ROW_LENGTH 5
+| i  | i+1                                | (i+1)%5 |
+| -- | ---------------------------------- | ------- |
+| 0  | 1                                  | 1       |
+| 1  | 2                                  | 2       |
+| 2  | 3                                  | 3       |
+| 3  | 4                                  | 4       |
+| 4  | <span style="color:red;">5</span>  | 0       |
 
-![Assets/clockwise.png](Assets/clockwise.png)
+<p align="center">
+    <img width="200" src="Assets/clockwise.png" alt="Diagram showing that adding 1 to 4 modulo 5 yields 0">
+</p>
 
 Unfortunately, `%` in C doesn't wrap negative numbers the way we'd want, so we can't write `(i-1)%ROW_LENGTH` and call it a day. `i+1` is like moving clockwise by one step on a clock, and `i-1` would be like moving counterclockwise by one step, which isn't how clocks work. However, we *could* keep going clockwise to where we would have been if we had been able to move clockwise: if you move forward by the number of numbers on the clock, you'll end up where you started.
 
@@ -188,9 +219,18 @@ All we need to do is add the number of numbers before wrapping:
 int left = current_cell_states[(i-1 + ROW_LENGTH)%ROW_LENGTH];
 ```
 
-[Wrapping around on the left with ROW_LENGTH 5](https://www.notion.so/bf9fafc5db404647ad46465c8cba1412)
+### Wrapping around on the left with ROW_LENGTH 5
+| i  | i-1                                | (i-1)+5                           | ((i-1)+5)%5 |
+| -- | ---------------------------------- | --------------------------------- | ----------- |
+| 0  | <span style="color:red;">-1</span> | 4                                 | 4           |
+| 1  | 0                                  | <span style="color:red;">5</span> | 0           |
+| 2  | 1                                  | <span style="color:red;">6</span> | 1           |
+| 3  | 2                                  | <span style="color:red;">7</span> | 2           |
+| 4  | 3                                  | <span style="color:red;">8</span> | 3           |
 
-![Assets/counterclockwise.png](Assets/counterclockwise.png)
+<p align="center">
+    <img width="200" src="Assets/counterclockwise.png" alt="Diagram showing that (0-1+5)%5 is 4, which is the same as a counterclockwise movement of -1">
+</p>
 
 Putting all of that together, we get:
 
@@ -219,7 +259,7 @@ for (int i = 0; i < ROW_LENGTH; i++) {
 
 Unfortunately, this doesn't work, because of time. Cell `i` at time `t` should depend on cells {`i-1`, `i`, and `i+1`} at time `t-1`. If `i` is `0`, that is indeed the case. However, with the loop above, by the time `i` becomes `1`, the left neighbor, `0`, will have already been overwritten with a value from time `t`; the information from time `t-1` there will have been lost. As `i` increases, the problem gets worse and worse:
 
-![Assets/Overwriting_previous_cells.png](Assets/Overwriting_previous_cells.png)
+![Diagram showing how previous states are overwritten](Assets/Overwriting_previous_cells.png)
 
 The easiest way to fix this problem is to store the states of the cells from time `t-1` separately from the cells from time `t`. Here's one way of doing that:
 
@@ -454,7 +494,7 @@ current_cell_states = next_cell_states;
 next_cell_states = temp;
 ```
 
-As discussed in the [Arrays and Pointers](https://www.notion.so/Build-your-own-1D-Cellular-Automata-664e3e0520244733b622ef246bd9235c#2fdbfa88612e40188871d2d1feaa83ad) section, you can't assign addresses to array names, so this doesn't work if `current_cell_states` and `next_cell_states` are arrays. But what if they're pointers instead?
+As discussed in the [Arrays and Pointers](#arrays-and-pointers) section, you can't assign addresses to array names, so this doesn't work if `current_cell_states` and `next_cell_states` are arrays. But what if they're pointers instead?
 
 ```c
 #define ROW_LENGTH 5
@@ -571,7 +611,7 @@ void main () {
 
 Up to this point, we've been relying on the existence of a function called `stateBasedOnNeighbors`, which, given the state of the current cell and its left and right neighbors, should return the new state of the cell by evaluating the rule of the cellular automaton. But how do we implement that function? If we're trying to implement rule 30:
 
-![Assets/Rule_30.png](Assets/Rule_30.png)
+![Rule 30's subrules: 111->0, 110->0, 101->0, 100->1, 011->1, 010->1, 001->1, 000->0](Assets/Rule_30.png)
 
 we could hardcode the rule and do something like this:
 
@@ -591,7 +631,7 @@ int stateBasedOnNeighbors (int left, int center, int right) {
 
 But what if we want to try out rule 101 instead of rule 30? With the above approach, we would need different functions for `rule30StateBasedOnNeighbors`, `rule101StateBasedOnNeighbors`, and yet more functions for any other rules we might want to explore. Could we make things easier for ourselves? Recall that each rule has the same "before" states, so the only things that would change between different rule functions implemented as above are the "after" states, the return values. Here's rule 30, again:
 
-![Assets/Rule_30_with_Before_and_After.png](Assets/Rule_30_with_Before_and_After.png)
+![Diagram showing that the after parts of rule 30 can be stored in an array of length 8](Assets/Rule_30_with_Before_and_After.png)
 
 We could define the "after" states in an array, in order:
 
