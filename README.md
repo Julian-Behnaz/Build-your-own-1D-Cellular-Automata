@@ -1088,4 +1088,3 @@ And here's `CURRENT_RULE 101` `ROW_LENGTH 80`:
 ###..#.#.#...#.##.#####...#..###.#.#..#..##....##..#.....#...##.##...#####.#..##
 ```
 
-[https://www.figma.com/file/NG6SkyKTofYBvkPcXuwMTq/Untitled?node-id=4%3A51](https://www.figma.com/file/NG6SkyKTofYBvkPcXuwMTq/Untitled?node-id=4%3A51)
