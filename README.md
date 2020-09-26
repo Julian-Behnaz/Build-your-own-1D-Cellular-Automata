@@ -48,13 +48,13 @@ Each subrule has two parts: a "before" state and an "after" state.
     If the before state involved just one cell, there would be two possible before states, 0 and 1:
 
     <p align="center">
-      <img width="600" src="Assets/one_cell.png" alt="One cell can be 1 or 0">
+      <img width="400" src="Assets/one_cell.png" alt="One cell can be 1 or 0">
     </p>
 
     Adding a cell adds two additional possibilities for each of the previous possibilities:
 
     <p align="center">
-      <img width="600" src="Assets/Frame_2_(1).png" alt="Two cells can be 00, 01, 10, or 11">
+      <img width="400" src="Assets/Frame_2_(1).png" alt="Two cells can be 00, 01, 10, or 11">
     </p>
 
     By the same logic, adding a third cell doubles the possibilities yet again, which gives us <b>2&#215;2&#215;2 = 8</b> possible "before" states with 3 cells that have two possible states each. In general, the number of possible states given <b>n</b> cells is <b>2<sup>n</sup></b>. With <b>3</b> cells, there's <b>2<sup>3</sup></b> possible before states, so we need <b>8</b> subrules.
@@ -208,7 +208,7 @@ int right = current_cell_states[(i+1)%ROW_LENGTH];
 | 4  | <span style="color:red;">5</span>  | 0       |
 
 <p align="center">
-    <img width="600" src="Assets/clockwise.png" alt="Diagram showing that adding 1 to 4 modulo 5 yields 0">
+    <img width="400" src="Assets/clockwise.png" alt="Diagram showing that adding 1 to 4 modulo 5 yields 0">
 </p>
 
 Unfortunately, `%` in C doesn't wrap negative numbers the way we'd want, so we can't write `(i-1)%ROW_LENGTH` and call it a day. `i+1` is like moving clockwise by one step on a clock, and `i-1` would be like moving counterclockwise by one step, which isn't how clocks work. However, we *could* keep going clockwise to where we would have been if we had been able to move clockwise: if you move forward by the number of numbers on the clock, you'll end up where you started.
@@ -229,7 +229,7 @@ int left = current_cell_states[(i-1 + ROW_LENGTH)%ROW_LENGTH];
 | 4  | 3                                  | <span style="color:red;">8</span> | 3           |
 
 <p align="center">
-    <img width="600" src="Assets/counterclockwise.png" alt="Diagram showing that (0-1+5)%5 is 4, which is the same as a counterclockwise movement of -1">
+    <img width="400" src="Assets/counterclockwise.png" alt="Diagram showing that (0-1+5)%5 is 4, which is the same as a counterclockwise movement of -1">
 </p>
 
 Putting all of that together, we get:
