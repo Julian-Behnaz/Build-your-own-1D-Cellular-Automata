@@ -26,17 +26,17 @@ Above you can see several 1D cellular automata visualized over time, with filled
 We said that the state of each cell at time `t` depends on its state and that of its direct neighbors at `t-1`. We can visualize that relationship with a "T" shape, like this:
 
 <p align="center">
-  <img width="200" src="Assets/T_Shape.png" alt="T-Shape diagram showing how a cell's state depends on the previous state">
+  <img width="600" src="Assets/T_Shape.png" alt="T-Shape diagram showing how a cell's state depends on the previous state">
 </p>
 
 <p align="center">
-  <img width="200" src="Assets/Subrule_Example.png" alt="An example of a specific subrule: 101 -> 1">
+  <img width="600" src="Assets/Subrule_Example.png" alt="An example of a specific subrule: 101 -> 1">
 </p>
 
 An automaton's rule expresses what state the "after" cell (at time `t`) should be in given the 3 "before" states (at `t-1`), for all possible configurations of those states. For example, a rule might include the subrule "if I am `0` and my left and right neighbors are `1`, I should become `1`":
 
 <p align="center">
-  <img width="200" src="Assets/Subrule_Example-1.png" alt="An example of a specific subrule (101 -> 1) annotated with numbers">
+  <img width="600" src="Assets/Subrule_Example-1.png" alt="An example of a specific subrule (101 -> 1) annotated with numbers">
 </p>
 
 Each subrule has two parts: a "before" state and an "after" state.
@@ -48,13 +48,13 @@ Each subrule has two parts: a "before" state and an "after" state.
     If the before state involved just one cell, there would be two possible before states, 0 and 1:
 
     <p align="center">
-      <img width="200" src="Assets/one_cell.png" alt="One cell can be 1 or 0">
+      <img width="600" src="Assets/one_cell.png" alt="One cell can be 1 or 0">
     </p>
 
     Adding a cell adds two additional possibilities for each of the previous possibilities:
 
     <p align="center">
-      <img width="200" src="Assets/Frame_2_(1).png" alt="Two cells can be 00, 01, 10, or 11">
+      <img width="600" src="Assets/Frame_2_(1).png" alt="Two cells can be 00, 01, 10, or 11">
     </p>
 
     By the same logic, adding a third cell doubles the possibilities yet again, which gives us <b>2&#215;2&#215;2 = 8</b> possible "before" states with 3 cells that have two possible states each. In general, the number of possible states given <b>n</b> cells is <b>2<sup>n</sup></b>. With <b>3</b> cells, there's <b>2<sup>3</sup></b> possible before states, so we need <b>8</b> subrules.
@@ -80,7 +80,7 @@ Some of these Rules are incredibly boring. For example, Rule 0 represents a dead
 Isn't that wild?
 
 <p align="center">
-    <img width="200" src="Assets/ElementaryCA_850.gif" alt="18 different CAs forming interesting triangular patterns">
+    <img width="600" src="Assets/ElementaryCA_850.gif" alt="18 different CAs forming interesting triangular patterns">
 </p>
 
 # Implementing 1D Cellular Automata
@@ -119,7 +119,7 @@ for (int i = 0; i < ROW_LENGTH; i++) {
 Unfortunately, that doesn't work. When `i` is `0`, `i-1` is `-1`, and `current_cell_states[-1]` is out of bounds. If `ROW_LENGTH` is `5`, only `0`, `1`, `2`, `3`, and `4` are valid indices:
 
 <p align="center">
-    <img width="200" src="Assets/out_of_bounds.png" alt="In an array of length 5, index -1 and 5 are out of bounds">
+    <img width="600" src="Assets/out_of_bounds.png" alt="In an array of length 5, index -1 and 5 are out of bounds">
 </p>
 
 Similarly, if `i` is `4`, `i+1` is `5`, which is out of bounds in the other direction. Before we try to fix this, let's think about what our code is trying to do and what might be going wrong at either end of the array.
@@ -129,19 +129,19 @@ In general, we're moving through all of our cells, one at a time, and determinin
 This works:
 
 <p align="center">
-    <img width="200" src="Assets/edges_center.png" alt="Indices 1,3 are valid neighbors for index 2">
+    <img width="600" src="Assets/edges_center.png" alt="Indices 1,3 are valid neighbors for index 2">
 </p>
 
 This doesn't:
 
 <p align="center">
-    <img width="200" src="Assets/edge_right.png" alt="Index 4 has valid neighbor 3 and invalid neighbor 5">
+    <img width="600" src="Assets/edge_right.png" alt="Index 4 has valid neighbor 3 and invalid neighbor 5">
 </p>
 
 This also doesn't:
 
 <p align="center">
-    <img width="200" src="Assets/edge_left.png" alt="Index 0 has valid neighbor 1 and invalid neighbor -1">
+    <img width="600" src="Assets/edge_left.png" alt="Index 0 has valid neighbor 1 and invalid neighbor -1">
 </p>
 
 One option would be to only look at the neighbors of cells with indices between `i=1` and `i=ROW_LENGTH-2`, but that would mean that the cells at the edges can never change state. Instead, we're going to pretend that the edges wrap around; that if we look at the left neighbor of cell `i=0` we are going to get the cell at index `ROW_LENGTH-1` and if we look at the right neighbor of cell `i=ROW_LENGTH-1`, we are going to get the cell at index `0`.
@@ -178,7 +178,7 @@ A clock face has the numbers 1 through 12. Most of the time, the number after th
 The remainder operator (`%` in C) happens to have a similar wrapping property. The remainder of 4 divided by 5 (written `4%5`),  is 4. `5%5` is 0. `6%5` is 1. For positive numbers, the result of `x%n` is always between `0` and `n-1`.
 
 <p align="center">
-    <img width="200" src="Assets/Remainder.png" alt="Diagram showing that on a clock with numbers 0-4 inclusive, higher numbers wrap to the numbers 0-4">
+    <img width="600" src="Assets/Remainder.png" alt="Diagram showing that on a clock with numbers 0-4 inclusive, higher numbers wrap to the numbers 0-4">
 </p>
 
 So we can rewrite
@@ -208,7 +208,7 @@ int right = current_cell_states[(i+1)%ROW_LENGTH];
 | 4  | <span style="color:red;">5</span>  | 0       |
 
 <p align="center">
-    <img width="200" src="Assets/clockwise.png" alt="Diagram showing that adding 1 to 4 modulo 5 yields 0">
+    <img width="600" src="Assets/clockwise.png" alt="Diagram showing that adding 1 to 4 modulo 5 yields 0">
 </p>
 
 Unfortunately, `%` in C doesn't wrap negative numbers the way we'd want, so we can't write `(i-1)%ROW_LENGTH` and call it a day. `i+1` is like moving clockwise by one step on a clock, and `i-1` would be like moving counterclockwise by one step, which isn't how clocks work. However, we *could* keep going clockwise to where we would have been if we had been able to move clockwise: if you move forward by the number of numbers on the clock, you'll end up where you started.
@@ -229,7 +229,7 @@ int left = current_cell_states[(i-1 + ROW_LENGTH)%ROW_LENGTH];
 | 4  | 3                                  | <span style="color:red;">8</span> | 3           |
 
 <p align="center">
-    <img width="200" src="Assets/counterclockwise.png" alt="Diagram showing that (0-1+5)%5 is 4, which is the same as a counterclockwise movement of -1">
+    <img width="600" src="Assets/counterclockwise.png" alt="Diagram showing that (0-1+5)%5 is 4, which is the same as a counterclockwise movement of -1">
 </p>
 
 Putting all of that together, we get:
