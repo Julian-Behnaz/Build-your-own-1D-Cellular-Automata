@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "type": "shell",
+        "label": "cl.exe build active file",
+        "command": "${workspaceFolder}//build.bat",
+        "args": [
+          "/Zi",
+          "/EHsc",
+          "/Fe:",
+          "${fileDirname}\\${fileBasenameNoExtension}.exe",
+          "${file}"
+        ],
+        "problemMatcher": ["$msCompile"],
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
