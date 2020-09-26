@@ -199,13 +199,13 @@ int right = current_cell_states[(i+1)%ROW_LENGTH];
 ```
 
 ### Wrapping around on the right with ROW_LENGTH 5
-| i  | i+1                                | (i+1)%5 |
-| -- | ---------------------------------- | ------- |
-| 0  | 1                                  | 1       |
-| 1  | 2                                  | 2       |
-| 2  | 3                                  | 3       |
-| 3  | 4                                  | 4       |
-| 4  | <span style="color:red;">5</span>  | 0       |
+| i  | i+1   | (i+1)%5 |
+| -- | ----- | ------- |
+| 0  | 1     | 1       |
+| 1  | 2     | 2       |
+| 2  | 3     | 3       |
+| 3  | 4     | 4       |
+| 4  | 5 ❌  | 0       |
 
 <p align="center">
     <img width="400" src="Assets/clockwise.png" alt="Diagram showing that adding 1 to 4 modulo 5 yields 0">
@@ -220,13 +220,13 @@ int left = current_cell_states[(i-1 + ROW_LENGTH)%ROW_LENGTH];
 ```
 
 ### Wrapping around on the left with ROW_LENGTH 5
-| i  | i-1                                | (i-1)+5                           | ((i-1)+5)%5 |
-| -- | ---------------------------------- | --------------------------------- | ----------- |
-| 0  | <span style="color:red;">-1</span> | 4                                 | 4           |
-| 1  | 0                                  | <span style="color:red;">5</span> | 0           |
-| 2  | 1                                  | <span style="color:red;">6</span> | 1           |
-| 3  | 2                                  | <span style="color:red;">7</span> | 2           |
-| 4  | 3                                  | <span style="color:red;">8</span> | 3           |
+| i  | i-1   | (i-1)+5 | ((i-1)+5)%5 |
+| -- | ----- | ------- | ----------- |
+| 0  | -1 ❌ | 4       | 4           |
+| 1  | 0     | 5 ❌    | 0           |
+| 2  | 1     | 6 ❌    | 1           |
+| 3  | 2     | 7 ❌    | 2           |
+| 4  | 3     | 8 ❌    | 3           |
 
 <p align="center">
     <img width="400" src="Assets/counterclockwise.png" alt="Diagram showing that (0-1+5)%5 is 4, which is the same as a counterclockwise movement of -1">
