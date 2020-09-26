@@ -1,4 +1,5 @@
 # Build your own 1D Cellular Automata
+By [Julian Ceipek](https://jceipek.com/) and [Behnaz Farahi](http://www.behnazfarahi.com/).
 
 # What is a Cellular Automaton?
 
