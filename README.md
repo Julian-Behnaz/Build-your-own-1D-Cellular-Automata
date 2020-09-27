@@ -257,7 +257,7 @@ for (int i = 0; i < ROW_LENGTH; i++) {
 }
 ```
 
-Unfortunately, this doesn't work, because of time. Cell `i` at time `t` should depend on cells {`i-1`, `i`, and `i+1`} at time `t-1`. If `i` is `0`, that is indeed the case. However, with the loop above, by the time `i` becomes `1`, the left neighbor, `0`, will have already been overwritten with a value from time `t`; the information from time `t-1` there will have been lost. As `i` increases, the problem gets worse and worse:
+Unfortunately, this doesn't work, because of time. Cell `i` at time `t` should depend on cells {`i-1`, `i`, and `i+1`} at time `t-1`. If `i` is `0`, that is indeed the case. However, with the loop above, by the time `i` becomes `1`, the left neighbor, `0`, will have already been overwritten with a value from time `t`; the information from time `t-1` there will have been lost. The problem continues as `i` increases:
 
 ![Diagram showing how previous states are overwritten](Assets/Overwriting_previous_cells.png)
 
